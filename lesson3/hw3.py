@@ -9,8 +9,8 @@ def fibonacci(n):
 
 
 
-n = int(input())
 if __name__ == '__main__':
+    n = int(input())
     print(fibonacci(n))
 
 
