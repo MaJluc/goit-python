@@ -1,0 +1,141 @@
+from datetime import datetime, timedelta
+
+
+def get_birthdays_per_week(users):
+    day_now = datetime.now() 
+    #day_now = datetime.strptime('01.08.2022', '%d.%m.%Y')  - для перевірки коду можна підставити любу дату
+    Monday = []
+    Tuesday = []
+    Wednesday = []
+    Thursday = []
+    Friday =[]
+   
+    for i in users:
+        a = i['birthday']
+        a = datetime.strptime(a, '%d.%m.%Y')
+        if day_now.strftime("%A") == 'Saturday':
+            if a.date() == day_now.date():
+                Monday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=1):
+                Monday.append(i['name'])    
+            elif a.date() == day_now.date()+timedelta(days=2):
+                Monday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=3):
+                Tuesday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=4):
+                Wednesday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=5):
+                Thursday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=6):
+                Friday.append(i['name'])
+            else:
+                continue
+        if day_now.strftime("%A") == 'Sunday':
+            if a.date() == day_now.date() or a.date() == day_now.date()+timedelta(days=1):
+                Monday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=2):
+                Tuesday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=3):
+                Wednesday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=4):
+                Thursday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=5):
+                Friday.append(i['name'])
+            else:
+                continue
+        if day_now.strftime("%A") == 'Monday':
+            if a.date() == day_now.date()+timedelta(days=7):
+                Monday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=8):
+                Tuesday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=9):
+                Wednesday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=10):
+                Thursday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=11):
+                Friday.append(i['name'])
+            else:
+                continue
+        if day_now.strftime("%A") == 'Tuesday':
+            if a.date() == day_now.date()+timedelta(days=6):
+                Monday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=7):
+                Tuesday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=8):
+                Wednesday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=9):
+                Thursday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=10):
+                Friday.append(i['name'])
+            else:
+                continue
+        if day_now.strftime("%A") == 'Wednesday':
+            if a.date() == day_now.date()+timedelta(days=5):
+                Monday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=6):
+                Tuesday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=7):
+                Wednesday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=8):
+                Thursday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=9):
+                Friday.append(i['name'])
+            else:
+                continue
+        if day_now.strftime("%A") == 'Thursday':
+            if a.date() == day_now.date()+timedelta(days=4):
+                Monday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=5):
+                Tuesday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=6):
+                Wednesday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=7):
+                Thursday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=8):
+                Friday.append(i['name'])
+            else:
+                continue    
+        if day_now.strftime("%A") == 'Friday':
+            if a.date() == day_now.date()+timedelta(days=3):
+                Monday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=4):
+                Tuesday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=5):
+                Wednesday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=6):
+                Thursday.append(i['name'])
+            elif a.date() == day_now.date()+timedelta(days=7):
+                Friday.append(i['name'])
+            else:
+                continue
+    if Monday != []:
+        print(f'Monday: {", ".join(Monday)}')
+    if Tuesday != []:
+        print(f'Tuesday: {", ".join(Tuesday)}')
+    if Wednesday != []:
+        print(f'Wednesday: {", ".join(Wednesday)}')
+    if Thursday != []:
+        print(f'Thursday: {", ".join(Thursday)}')
+    if Friday != []:
+        print(f'Friday: {", ".join(Friday)}')
+
+
+def main():
+    users = [{'name':'Петро', 'birthday':'31.07.2022'},
+        {'name':'Семен', 'birthday':'01.07.2022'},
+        {'name':'Максим', 'birthday':'02.08.2022'},
+        {'name':'Оксана', 'birthday':'03.08.2022'},
+        {'name':'Катерина', 'birthday':'03.08.2022'},
+        {'name':'Михайло', 'birthday':'05.08.2022'},
+        {'name':'Сергій', 'birthday':'13.08.2022'},
+        {'name':'Єва', 'birthday':'06.08.2022'},
+        {'name':'Егор', 'birthday':'11.08.2022'},
+        {'name':'Ганна', 'birthday':'08.08.2022'},
+        {'name':'Борис', 'birthday':'09.08.2022'},
+        {'name':'Світлана', 'birthday':'10.08.2022'}]
+        
+    get_birthdays_per_week(users)
+
+
+if __name__ == "__main__":
+    main()
