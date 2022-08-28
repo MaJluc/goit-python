@@ -9,7 +9,6 @@ class AddressBook(UserDict):
         self.data[name] = record
 
     def iterator(self, n=None):
-    # returns a view for 'n' records in one iteration
         outer_count = 1
         inner_count = 1
         n_records = []
