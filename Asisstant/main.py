@@ -1,5 +1,7 @@
+import clean_folder
 import os
 import re
+import pathlib
 import sys
 from datetime import timedelta, datetime
 
@@ -23,6 +25,7 @@ class Asisstant:
         self.user_birthday = ''
         self.user_note = ''
         self.user_tag = ''
+        self.user_folder = ''
         self.data = []
         print('Привіт! Введи \'help\' для виводу меню екран.')
 
@@ -45,6 +48,8 @@ class Asisstant:
             consumer.help()
         elif command == 'exit':
             consumer.exit()
+        elif command == 'folder':
+            consumer.folder()
         else:
             print(f'Команди "{command}" не існує. Будь ласка, спробуй ще раз')
 
@@ -56,7 +61,8 @@ class Asisstant:
         print('<search>   - пошук інформації по всій книзі контактів;')
         print('<edit>     - редагувати та видаляти інформацію з контактної книги;')
         print('<delete>   - видалити контакт з книги контактів;')
-        print('<show>     - відобразити весь вміст контактної книги;') 
+        print('<show>     - відобразити весь вміст контактної книги;')
+        print('<folder>   - сортування папки')
         print('<exit>     - вихід з програми')
 
         
@@ -278,6 +284,20 @@ class Asisstant:
         self.user_tag = '#' + input('Додайте тег, або натисніть "Enter", щоб продовжити: ')
         return self.user_tag
 
+    def folder(self):
+        while True:
+            try:
+                #self.user_folder = input('Вкажіть шлях до файлу: ')
+                path = input('Вкажіть шлях до файлу: ')
+                path = pathlib.Path(path)
+                if os.path.isdir(path):
+                    break
+                else:
+                    print("Такої папки не існує, спробуй ще раз.")
+            except ValueError:
+                print("Такої папки не існує, спробуй ще раз.")
+        return clean_folder.sort_files(path)
+
 
     def combine_data(self):
         combine_data = consumer.name_input() + '| ' + consumer.phone_input() + '| ' + consumer.location_input() + '| ' +  consumer.email_input() + '| '\
@@ -368,8 +388,8 @@ class Asisstant:
 consumer = Asisstant()
 
 
+
 def main():
-    
     while True:
         try:
             os.mkdir('data')
@@ -377,6 +397,6 @@ def main():
             pass
         consumer.command()
 
-    
 if __name__ == '__main__':
     main()
+
